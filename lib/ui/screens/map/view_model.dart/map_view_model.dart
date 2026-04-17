@@ -87,5 +87,4 @@ class MapViewModel extends ChangeNotifier{
   void setBooking(Booking booking){
     bookingRepository.setBookings(booking);
   }
-  
 }

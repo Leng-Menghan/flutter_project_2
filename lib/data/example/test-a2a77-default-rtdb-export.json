@@ -1,0 +1,82 @@
+{
+  "bikes": {
+    "01": { "stationId": "104", "status": "available" },
+    "02": { "stationId": "104", "status": "available" },
+    "03": { "stationId": "104", "status": "unavailable" },
+
+    "04": { "stationId": "204", "status": "available" },
+    "05": { "stationId": "204", "status": "available" },
+    "06": { "stationId": "204", "status": "unavailable" },
+    "07": { "stationId": "204", "status": "available" },
+
+    "08": { "stationId": "304", "status": "available" },
+    "09": { "stationId": "304", "status": "available" },
+    "10": { "stationId": "304", "status": "unavailable" },
+    "11": { "stationId": "304", "status": "available" },
+    "12": { "stationId": "304", "status": "available" },
+
+    "13": { "stationId": "404", "status": "available" },
+    "14": { "stationId": "404", "status": "available" },
+    "15": { "stationId": "404", "status": "unavailable" },
+    "16": { "stationId": "404", "status": "available" },
+
+    "17": { "stationId": "504", "status": "available" },
+    "18": { "stationId": "504", "status": "available" },
+    "19": { "stationId": "504", "status": "unavailable" }
+  },
+  "stations": {
+    "104": {
+      "name": "CADT",
+      "location": "Preaek Leap, Chroy Changvar, Phnom Penh"
+    },
+    "204": {
+      "name": "Wat Phnom",
+      "location": "Wat Phnom, Daun Penh, Phnom Penh"
+    },
+    "304": {
+      "name": "Phsar Thmey",
+      "location": "Phsar Thmey, Daun Penh, Phnom Penh"
+    },
+    "404": {
+      "name": "RUPP",
+      "location": "Tuol Svay Prey, Tuol Kork, Phnom Penh"
+    },
+    "504": {
+      "name": "Olympic Stadium",
+      "location": "Veal Vong, Prampir Makara, Phnom Penh"
+    }
+  },
+  "coordinates": [
+    {
+      "stationId": "104",
+      "longitude": 104.9068069,
+      "latitude": 11.6530569
+    },
+    {
+      "stationId": "204",
+      "longitude": 104.922442,
+      "latitude": 11.575989
+    },
+    {
+      "stationId": "304",
+      "longitude": 104.920362,
+      "latitude": 11.569395
+    },
+    {
+      "stationId": "404",
+      "longitude": 104.890889,
+      "latitude": 11.567669
+    },
+    {
+      "stationId": "504",
+      "longitude": 104.908559,
+      "latitude": 11.557548
+    }
+  ],
+  "subscriptions": [
+    
+  ],
+  "bookings": [
+
+  ]
+}

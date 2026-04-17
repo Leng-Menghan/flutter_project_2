@@ -6,7 +6,7 @@ class SubscriptionRepositoryMock implements SubscriptionRepository{
   final List<Subscription> _subscriptions = [
     Subscription(startDate: DateTime(2026, 3, 5), passType: PassType.day),
     Subscription(startDate: DateTime(2026, 4, 5), passType: PassType.day),
-    Subscription(startDate: DateTime.now(), passType: PassType.day),
+    // Subscription(startDate: DateTime.now(), passType: PassType.day),
   ];
   @override
   Future<Subscription?> fetchSubscription() {

@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../model/bike/bike.dart';
@@ -14,7 +12,7 @@ class StationDetail extends StatelessWidget {
   final StationItemData station;
   const StationDetail({super.key, required this.station});
 
-  String get availableBikes => "${station.availableBikes} available${station.availableBikes > 1 ? "" : "s"}";
+  String get availableBikes => "${station.availableBikes} available${station.availableBikes > 1 ? "s" : ""}";
 
   @override
   Widget build(BuildContext context) {
