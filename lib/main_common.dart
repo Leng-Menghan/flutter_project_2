@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'ui/screens/map/widgets/map_content.dart';
-import 'ui/screens/pass/widgets/pass_content.dart';
-import 'ui/screens/profile/widgets/profile_content.dart';
+import 'package:provider/provider.dart';
+import 'ui/screens/map/map_screen.dart';
+import 'ui/screens/pass/pass_screen.dart';
+import 'ui/screens/profile/profile_screen.dart';
 import 'ui/theme/theme.dart';
 
-void main() {
-  runApp(const MyApp());
+void mainCommon(List<InheritedProvider> providers) {
+  runApp(
+    MultiProvider(
+      providers: providers,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MyApp()
+      ),
+    ),
+  );
 }
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -15,9 +24,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _currentIndex = 2;
+  int _currentIndex = 1;
 
-  final List<Widget> _pages = [PassContent(), MapContent(), ProfileContent()];
+  final List<Widget> _pages = [PassScreen(), MapScreen(), ProfileScreen()];
 
   @override
   Widget build(BuildContext context) {

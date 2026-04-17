@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import '../../../../model/subscription/subscription.dart';
 import '../../../theme/theme.dart';
+import '../../../widgets/display/active_pass.dart';
 import '../../../widgets/display/inactive_pass.dart';
+import '../view_model/pass_view_model.dart';
 import 'pass_subscription.dart';
 
 class PassContent extends StatelessWidget {
-  const PassContent({super.key});
+  final PassViewModel passViewModel;
+  const PassContent({super.key, required this.passViewModel});
 
   @override
   Widget build(BuildContext context) {
+    void onSubscribe(PassType passType){
+      Subscription subscription = Subscription(startDate: DateTime.now(), passType: passType);
+      passViewModel.setSubscription(subscription);
+    }
+
+    Subscription? subscription = passViewModel.subscription;
+    Widget content = subscription == null ? InactivePass() : ActivePass(subscription: subscription);
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.priBackground,
@@ -29,34 +41,14 @@ class PassContent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InactivePass(),
+              content,
               const SizedBox(height: 25),
               Text("Select your journey", style: AppTextStyles.title.copyWith(fontWeight: FontWeight.bold)),
               Text("Choose a subscription plan that you prefered", style: AppTextStyles.body.copyWith(color: AppColors.subText)),
               const SizedBox(height: 25),
-              PassSubscription(
-                specialKeyWord: "flexible", 
-                passType: "Day Pass", 
-                price: 5, 
-                duration: "24-hour", 
-                onSubscribe: () {}
-              ),
-              const SizedBox(height: 20),
-              PassSubscription(
-                specialKeyWord: "MOST POPULAR", 
-                passType: "Monthly Pass", 
-                price: 30, 
-                duration: "30-day", 
-                onSubscribe: () {}
-              ),
-              const SizedBox(height: 20),
-              PassSubscription(
-                specialKeyWord: "best value", 
-                passType: "Annual Pass", 
-                price: 125, 
-                duration: "365-day", 
-                onSubscribe: () {}
-              ),
+              ...PassType.values.map((pt) {
+                  return PassSubscription(passType: pt, onSubscribe: () => onSubscribe(pt));
+              })
             ],
           ),
         ),

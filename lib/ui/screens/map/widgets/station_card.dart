@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../theme/theme.dart';
-import 'custom_chip.dart';
+import '../../../../model/bike/bike.dart';
+import '../../../theme/theme.dart';
+import '../../../widgets/display/custom_chip.dart';
+import '../view_model.dart/station_item_data.dart';
 
-class BookingCard extends StatelessWidget {
-  const BookingCard({super.key});
+class StationCard extends StatelessWidget {
+  final StationItemData station;
+  final Bike bike;
+  const StationCard({super.key, required this.station, required this.bike});
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +28,16 @@ class BookingCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomChip(name: "Station 422"),
+              CustomChip(name: "Station ${station.station.id}"),
               const SizedBox(height: 15,),
-              Text("CADT", style: AppTextStyles.heading),
-              Text("Preak Leab, ChroyChangVa, Phnom Penh", style: AppTextStyles.body.copyWith(color: AppColors.subText)),
+              Text(station.station.name, style: AppTextStyles.heading),
+              Text(station.station.location, style: AppTextStyles.body.copyWith(color: AppColors.subText)),
               const SizedBox(height: 15,),
               Row(
                 children: [
                   Icon(Icons.pedal_bike, color: AppColors.label, size: 50),
                   const SizedBox(width: 20),
-                  Text("SLOT 01", style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold, color: AppColors.subText)),
+                  Text("SLOT ${bike.id}", style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold, color: AppColors.subText)),
                 ],
               )
             ],

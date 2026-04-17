@@ -1,22 +1,36 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../model/bike/bike.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/display/custom_chip.dart';
+import '../view_model.dart/map_view_model.dart';
+import '../view_model.dart/station_item_data.dart';
 import 'bike_item.dart';
 import 'booking_detail.dart';
 
 class StationDetail extends StatelessWidget {
-  const StationDetail({super.key});
+  final StationItemData station;
+  const StationDetail({super.key, required this.station});
 
-
-  void onUnlockBike(BuildContext context){
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const BookingDetail()),
-    );
-  }
+  String get availableBikes => "${station.availableBikes} available${station.availableBikes > 1 ? "" : "s"}";
 
   @override
   Widget build(BuildContext context) {
+    MapViewModel mapViewModel = context.watch<MapViewModel>();
+    
+    void onUnlockBike(StationItemData station, Bike bike){
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider<MapViewModel>.value(
+            value: mapViewModel,
+            child: BookingDetail(station: station, bike: bike),
+            ),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.priBackground,
@@ -41,12 +55,12 @@ class StationDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("CADT", style: AppTextStyles.heading),
-                  CustomChip(name: "Station 442")
+                  Text(station.station.name, style: AppTextStyles.heading),
+                  CustomChip(name: "Station ${station.station.id}")
                 ],
               ),
               const SizedBox(height: 5),
-              Text("Preak Leab, ChroyChangVa, Phnom Penh", style: AppTextStyles.body.copyWith(color: AppColors.subText)),
+              Text(station.station.location, style: AppTextStyles.body.copyWith(color: AppColors.subText)),
               const SizedBox(height: 25),
               Stack(
                 children: [
@@ -74,7 +88,7 @@ class StationDetail extends StatelessWidget {
                         children: [
                           Icon(Icons.pedal_bike, color: AppColors.label, size: 30,),
                           const SizedBox(width: 10),
-                          Text("5 availables", style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold, color: AppColors.subText)),
+                          Text(availableBikes, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold, color: AppColors.subText)),
                         ],
                       ),
                     ),
@@ -83,14 +97,8 @@ class StationDetail extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               Text("Available Bikes", style: AppTextStyles.title.copyWith(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 20),
-              BikeItem(onUnlock: () => onUnlockBike(context)),
-              const SizedBox(height: 20),
-              BikeItem(onUnlock: () => onUnlockBike(context)),
-              const SizedBox(height: 20),
-              BikeItem(onUnlock: () => onUnlockBike(context)),
-              const SizedBox(height: 20),
-              BikeItem(onUnlock: () => onUnlockBike(context))
+              const SizedBox(height: 10),
+              ...station.bikes.map((bike) => BikeItem(onUnlock: (bike) => onUnlockBike(station, bike), bike: bike))
             ],
           ),
         ),

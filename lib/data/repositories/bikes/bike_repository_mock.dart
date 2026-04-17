@@ -41,8 +41,7 @@ class BikeRepositoryMock implements BikeRepository{
   }
 
   @override
-  Future<void> updateBikeStatus(String id) async {
-    Bike bike = _bikes.firstWhere((bike) => bike.id == id);
+  Future<void> updateBikeStatus(Bike bike) async {
     bike.status = Status.unavailable;
   }
   

@@ -21,7 +21,7 @@ class BookingDto {
   }
 
   /// Convert to JSON
-  Map<String, dynamic> toJson(Booking booking) {
+  static Map<String, dynamic> toJson(Booking booking) {
     return {
       stationIdKey: booking.stationId,
       bikeIdKey: booking.bikeId,
